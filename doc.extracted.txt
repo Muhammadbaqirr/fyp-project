@@ -1,0 +1,990 @@
+--- Page 1 ---
+An AI-Based Classroom Monitoring
+System Leveraging Computer Vision and
+Machine Learning
+By
+HASSAN RASHEED
+CIIT/FA22-BAI-045/ATK
+MUHAMMAD BAQIR
+CIIT/FA22-BAI-020/ATK
+ZAHEER KHAN
+CIIT/FA22-BAI-011/ATK
+Project
+for
+Bachelor of Science in Artificial Intelligence
+COMSATS University Islamabad
+
+--- Page 2 ---
+Attock Campus - Pakistan
+SPRING, 2025
+ii
+
+--- Page 3 ---
+COMSATS University Islamabad, Attock Campus
+An AI-Based Classroom Monitoring System
+Leveraging Computer Vision and Machine Learning
+This Project is Presented to
+COMSATS University Islamabad Attock Campus
+In partial fulfillment
+of the requirement for the degree of
+BS in Artificial Intelligence
+By
+HASSAN RASHEED
+CIIT/FA22-BAI-045/ATK
+MUHAMMAD BAQIR
+CIIT/FA22-BAI-020/ATK
+ZAHEER KHAN
+CIIT/FA22-BAI-011/ATK
+iii
+
+--- Page 4 ---
+SPRING, 2025
+iv
+
+--- Page 5 ---
+An AI-Based Classroom Monitoring System
+Leveraging Computer Vision and Machine Learning
+This final year project is submitted to the name of Department of Computer
+Science as partial fulfillment of the requirement for the award of degree of
+BS Artificial Intelligence.
+Name Registration Number
+HASSAN RASHEED CIIT/FA22-BAI-045/ATK
+MUHAMMAD BAQIR CIIT/FA22-BAI-020/ATK
+ZAHEER KHAN CIIT/FA22-BAI-011/ATK
+Supervisor
+DR ZAHOOR UR REHMAN
+Designation,
+Department of Computer Science
+COMSATS University Islamabad, Attock Campus
+v
+
+--- Page 6 ---
+Month, Year
+vi
+
+--- Page 7 ---
+Final Approval
+This Project titled
+AnAI-Based Classroom Monitoring System
+Leveraging Computer Vision and Machine Learning
+By
+HASSAN RASHEED
+CIIT/F A22-BAI-045/ATK
+MUHAMMAD BAQIR
+CIIT/F A22-BAI-020/ATK
+largeZAHEER KHAN
+CIIT/F A22-BAI-011/ATK
+Has been approved For the COMSATS University Islamabad, Attock Campus.
+External Examiner:
+Dr. External Examinor
+University Name
+Supervisor:
+Dr. Zahoor ur Rehman
+Department of Computer Science, (CUI) Attock Campus
+HoD:
+Dr. Zahoor ur Rehman
+Department of Computer Science, (CUI) Attock Campus
+vii
+
+--- Page 8 ---
+Author’s Declaration
+I ¡¡Hassan Rasheed,Muhammad Baqir,Zaheer Khan ¿¿, ¡¡Fa22-BAI-045,Fa22-BAI-020,Fa22-
+BAI-011¿¿, hereby declare that I have produced the work presented in this project, during
+the scheduled period of study. I also declare that I have not taken any material from any
+source except referred to wherever due to that amount of plagiarism is within an acceptable
+range. If a violation of HEC rules on research has occurred in this thesis, I shall be liable
+to punishable action under the plagiarism rules of HEC.
+Student Signature
+Hassan Rasheed
+CIIT/FA23-BSAI-045/ATK
+Student Signature
+Muhammad Baqir
+CIIT/FA23-BSAI-020/ATK
+Student Signature
+Zaheer Khan
+CIIT/FA23-BSAI-011/ATK
+Date:
+viii
+
+--- Page 9 ---
+Certificate
+It is certified that ¡¡Hassan Rasheed,Muhammad Baqir,Zaheer Khan¿¿, ¡¡FA22-BAI-045,FA22-
+BAI-020,FA22-BAI-011¿¿, has carried out all the work related to this thesis under my su-
+pervision at the Department of ¡¡Computer Science¿¿, COMSATS University Islamabad,
+¡¡Attock Campus¿¿ and the work fulfills the requirements for the award of the degree of
+BS in ¡program name¿.
+Supervisor
+Dr. Zahoor ur Rehman
+Designation,
+Department of Computer Science,
+CUI, Attock Campus
+Head of Department:
+Dr. Zahoor ur Rehman
+Associate Professor,
+Department of Computer Science,
+CUI, Attock Campus
+ix
+
+--- Page 10 ---
+Dedicated to my parents,
+who have always been my biggest supporters
+and a constant source of inspiration
+x
+
+--- Page 11 ---
+ACKNOWLEDGEMENTS
+Praise to be ALLAH, the Cherisher and Lord
+of the World, Most gracious and Most Merciful
+I would like to express my sincere gratitude to my project supervisor for their continuous
+guidance, support, and valuable feedback throughout the development of this Final Year
+Project. Their encouragement and insightful suggestions have played a significant role in
+shaping the direction and quality of this work. I am also thankful to my department and
+faculty members for providing the necessary resources and a productive learning environ-
+ment. Finally, I would like to acknowledge my family and friends for their encouragement,
+motivation, and unwavering support during this journey.
+HASSAN RASHEED
+CIIT/FA22-BAI-045/ATK
+MUHAMMAD BAQIR
+CIIT/FA22-BAI-020/ATK
+ZAHEER KHAN
+CIIT/FA22-BAI-011/ATK
+xi
+
+--- Page 12 ---
+Project Summary
+Artificial Intelligence has emerged as a transformative force across various domains, and
+its influence within education continues to expand. In modern academic environments,
+the need for automated classroom monitoring has become increasingly essential as institu-
+tions strive to enhance teaching quality, ensure transparency, and streamline administrative
+responsibilities. The proposedAI-Based Classroom Monitoring and Video Summa-
+rization Systemaddresses these needs by intelligently analyzing classroom videos and ex-
+tracting meaningful insights without manual intervention. Through advanced deep learning
+techniques, includingI3Dfor spatiotemporal feature extraction andLSTMfor sequential
+activity recognition, the system identifies key instructional behaviors such as lecturing,
+writing on the board, or interacting with students. Furthermore, the system generates con-
+cise summaries and highlight segments that encapsulate the core moments of a classroom
+session, thus enabling administrators to review lengthy lectures efficiently. In addition, the
+punctuality detection moduleevaluates instructor arrival and departure times by com-
+paring detected activity patterns with predefined timetables, producing automated alerts
+for late arrivals, early departures, or absences. All processed data is stored in structured
+form and displayed on a responsive web dashboard built withReactandTailwind CSS.
+The dashboard provides real-time access to summaries, highlights, punctuality logs, and
+system-generated notifications, ensuring that stakeholders remain informed and engaged.
+As a whole, the project introduces a scalable, modular, and intelligent system that reduces
+manual workload, improves institutional oversight, and contributes to effective academic
+management. The architecture also offers flexibility for future enhancements such as real-
+time monitoring, behavioral analytics, and integration with external academic systems,
+making it a robust solution for modern educational environments.
+xii
+
+--- Page 13 ---
+TABLE OF CONTENTS
+1 Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .1
+1.1 Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.2 Background. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+1.3 Problem Statement. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+1.4 Scope and Objectives. . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+1.5 System Limitations/Constraints. . . . . . . . . . . . . . . . . . . . . . 4
+1.6 Project Deliverables. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.7 Relevance to Course Modules. . . . . . . . . . . . . . . . . . . . . . . 4
+1.8 Problem Statement. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.9 Research Objective. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.10 Research Questions. . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.11 Contribution. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+1.12 Chapter Summary. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+2 Literature Review. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+2.0.1 First Application Problem / Research Paper. . . . . . . . . . . 1
+2.0.2 Second Application Problem / Research Paper. . . . . . . . . . 2
+2.0.3 Comparison Between Existing Applications and Proposed Project3
+2.1 Chapter Summary. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+3 Requirement Analysis. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .4
+3.1 User Classes and Characteristics. . . . . . . . . . . . . . . . . . . . . . 1
+3.2 Requirement Identifying Technique. . . . . . . . . . . . . . . . . . . . 1
+3.3 Functional Requirements. . . . . . . . . . . . . . . . . . . . . . . . . . 2
+3.3.1 FR-1: Teacher Activity Recognition. . . . . . . . . . . . . . . . 2
+3.3.2 FR-2: Generate Classroom Summary. . . . . . . . . . . . . . . 3
+3.3.3 FR-3: Extract Video Highlights. . . . . . . . . . . . . . . . . . 3
+3.3.4 FR-4: Track Arrival & Departure. . . . . . . . . . . . . . . . . 3
+3.3.5 FR-5: Compare With Timetable. . . . . . . . . . . . . . . . . . 4
+xiii
+
+--- Page 14 ---
+3.3.6 FR-6: Generate Alerts. . . . . . . . . . . . . . . . . . . . . . . 4
+3.3.7 FR-7: Dashboard Management. . . . . . . . . . . . . . . . . . 4
+3.4 Non-Functional Requirements. . . . . . . . . . . . . . . . . . . . . . . 4
+3.4.1 Reliability. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+3.4.2 Usability. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+3.4.3 Performance. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+3.4.4 Security. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+3.5 External Interface Requirements. . . . . . . . . . . . . . . . . . . . . . 5
+3.5.1 User Interface Requirements. . . . . . . . . . . . . . . . . . . . 5
+3.5.2 Software Interfaces. . . . . . . . . . . . . . . . . . . . . . . . . 6
+3.5.3 Hardware Interfaces. . . . . . . . . . . . . . . . . . . . . . . . . 6
+3.5.4 Communications Interfaces. . . . . . . . . . . . . . . . . . . . 6
+3.6 Chapter Summary. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+4 Design and Architecture. . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+4.1 Modules. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+4.1.1 Module 1: Video Processing & Activity Recognition Module. 1
+4.1.2 Module 2: Video Summarization & Highlights Module. . . . . 1
+4.1.3 Module 3: Punctuality Tracking Module. . . . . . . . . . . . . 2
+4.1.4 Module 4: Alert & Notification Module. . . . . . . . . . . . . 2
+4.1.5 Module 5: Admin Web Dashboard Module. . . . . . . . . . . 2
+4.1.6 Module 6: Database & Storage Module. . . . . . . . . . . . . . 3
+4.2 Architectural Design. . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+4.2.1 Client Layer (Admin Web Dashboard). . . . . . . . . . . . . . 3
+4.2.2 Backend API Layer (Flask / FastAPI). . . . . . . . . . . . . . . 4
+4.2.3 AI Processing Layer (I3D + LSTM Engine). . . . . . . . . . . 4
+4.2.4 Database Layer. . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+4.2.5 Storage Layer. . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+4.2.6 System Workflow Overview. . . . . . . . . . . . . . . . . . . . 5
+4.2.7 Architectural Diagrams. . . . . . . . . . . . . . . . . . . . . . . 5
+4.3 Design Models. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+xiv
+
+--- Page 15 ---
+4.3.1 Use Case Diagram. . . . . . . . . . . . . . . . . . . . . . . . . . 7
+4.3.2 Activity Diagram. . . . . . . . . . . . . . . . . . . . . . . . . . 8
+4.3.3 Class Diagram. . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+4.3.4 Sequence Diagram. . . . . . . . . . . . . . . . . . . . . . . . . 12
+4.3.5 State Transition Diagram. . . . . . . . . . . . . . . . . . . . . . 14
+4.3.6 ER Diagram. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+5 Conclusion. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .18
+5.1 Conclusion. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+References. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .2
+xv
+
+--- Page 16 ---
+LIST OF FIGURES
+Fig 4.1 Architecture design . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Fig 4.2 Use Case Diagram for the Classroom Monitoring System . . . . . . . . . . 7
+Fig 4.3 Activity Diagram of the Classroom Monitoring System . . . . . . . . . . . 9
+Fig 4.4 Class Diagram of the Classroom Monitoring System . . . . . . . . . . . . 11
+Fig 4.5 Sequence Diagram for Video Processing Workflow . . . . . . . . . . . . . 13
+Fig 4.6 State Transition Diagram of the Video Analysis Process . . . . . . . . . . 15
+Fig 4.7 ER Diagram of the Classroom Monitoring System . . . . . . . . . . . . . 17
+xvi
+
+--- Page 17 ---
+LIST OF TABLES
+Table 2.1 Comparison Between Existing Literature and Proposed Project . . . . . . 3
+Table 3.1 User Classes and Their Characteristics . . . . . . . . . . . . . . . . . . . 1
+Table 3.2 Description of FR-1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Table 3.3 Description of FR-2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Table 3.4 Description of FR-3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Table 3.5 Description of FR-4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 3
+Table 3.6 Description of FR-5 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Table 3.7 Description of FR-6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Table 3.8 Description of FR-7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+xvii
+
+--- Page 18 ---
+Chapter 1
+Introduction
+
+--- Page 19 ---
+Chapter Overview
+1.1 Introduction
+Artificial Intelligence (AI) has become a driving force behind the digital transformation of
+various industries, enabling automation, intelligent decision-making, and performance op-
+timization. Within the academic domain, AI has contributed to enhanced teaching method-
+ologies, e-learning platforms, automated grading systems, performance analytics, and im-
+proved administrative workflows. However, despite these advancements, classroom activity
+monitoring remains heavily dependent on traditional manual practices.
+In many educational institutions, supervisors are required to observe teachers manually,
+record punctuality, verify lesson delivery, evaluate engagement, and ensure adherence to
+schedules. These conventional methods are time-intensive, inconsistent, and difficult to
+scale—especially as the number of teachers and classrooms continues to increase. Manual
+monitoring also introduces subjectivity and is often unable to capture detailed activity pat-
+terns throughout the entire class duration.
+Recent developments in deep learning, particularly Inflated 3D Convolutional Networks
+(I3D) and Long Short-Term Memory (LSTM) models, have enabled machines to analyze
+and understand human activities within video sequences. I3D networks efficiently extract
+spatial-temporal features from visual data, while LSTM models accurately interpret activity
+progression across time. When combined, these technologies create a strong foundation for
+automated classroom video analysis.
+By applying these approaches to academic environments, classroom videos can be pro-
+cessed to identify teacher actions, summarize key moments, evaluate punctuality, and gen-
+erate intelligent alerts. This establishes a significant opportunity to build an AI-based
+Classroom Monitoring System capable of improving transparency, enhancing institutional
+accountability, and reducing administrative workload.
+1.2 Background
+Artificial Intelligence has gained prominence worldwide due to its ability to analyze com-
+plex data, automate repetitive tasks, and offer insights that were traditionally difficult to
+
+--- Page 20 ---
+obtain. In education, AI-driven applications have modernized teaching, assessment, and
+student support. Despite these advancements, monitoring teaching activities inside class-
+rooms still follows conventional, human-dependent procedures.
+Administrators often rely on manual inspections to confirm whether a teacher arrived on
+time, completed the required activities, or followed the assigned schedule. These processes
+are limited by human fatigue, subjectivity, delayed reporting, and a lack of continuous
+observation. As institutions grow larger, maintaining consistent monitoring becomes in-
+creasingly challenging.
+With the emergence of powerful vision-based models like I3D and LSTM, it is now possi-
+ble to automate the interpretation of classroom video data. These models can detect actions
+such as explaining lessons, writing on the board, reading material, sitting, interacting with
+students, or using mobile devices. Automated analysis can support administrators in gener-
+ating summaries, activity logs, punctuality evaluations, and performance trends with much
+higher accuracy and consistency compared to traditional methods.
+This forms the foundation for designing a comprehensive Classroom Monitoring System
+that leverages AI to enhance academic supervision and institutional governance.
+1.3 Problem Statement
+Although education is rapidly evolving toward digital transformation, institutions still lack
+an intelligent and automated mechanism to analyze classroom activities using video data.
+Current classroom monitoring procedures rely primarily on manual observation, making
+the process inconsistent, time-consuming, and difficult to manage on a large scale. Several
+challenges arise due to this dependency on human evaluation:
+•Absence of automated teacher punctuality tracking:Institutions currently do not
+possess a system capable of identifying and analyzing teacher arrival and departure
+times through classroom videos.
+•Unavailability of activity recognition tools:Existing platforms are unable to clas-
+sify actions such as explaining content, writing on the board, reading, sitting, inter-
+acting with students, or using mobile devices during class sessions.
+2
+
+--- Page 21 ---
+•Lack of automatic highlight extraction:Reviewing long video recordings manu-
+ally makes it extremely difficult to extract key classroom moments efficiently.
+•Inability to evaluate schedule adherence:Without intelligent automation, it be-
+comes challenging to determine whether teachers follow their assigned timetables
+and classroom responsibilities.
+•Absence of automated alert mechanisms:Deviations such as late arrivals, early
+departures, or irregular activity patterns remain undetected due to the lack of a smart
+notification system.
+•Unavailability of an integrated solution:Institutions do not yet have a unified
+system that can perform classroom summarization, activity recognition, highlight
+extraction, punctuality evaluation, and timetable comparison in one framework.
+These limitations hinder effective quality assurance, reduce institutional transparency, and
+create obstacles in performance monitoring. Developing an AI-based Classroom Moni-
+toring System is therefore essential for enhancing academic oversight, ensuring consistent
+evaluation, and improving overall operational efficiency.
+1.4 Scope and Objectives
+Write down the scope of your project in a paragraph. Briefly define the main functionalities
+of the proposed project. Scope defines the boundaries and range of the proposed solution,
+that what would be the part of your project. Write down in logical flow with consistency.
+(Usually in 14-18 sentences)
+The objectives of our proposed system our three fold.
+Example:
+[noitemsep,nolistsep,leftmargin=]
+PO1Reduce the cost of cafeteria food wastage by 40
+PO1Reduce cafeteria operating costs by 15
+PO1Increase average effective work time by 15 minutes per cafeteria-using employee per
+day.
+3
+
+--- Page 22 ---
+1.5 System Limitations/Constraints
+Write down the limitations and constraints of the proposed project.
+Example:
+[noitemsep,nolistsep,leftmargin=]
+L1Some food items that are available from the cafeteria will not be suitable for delivery,
+so the delivery menus available to patrons of the COS must be a subset of the full
+cafeteria menus.
+L2The COS shall be used only for the cafeteria at the Process Impact campus in Clacka-
+mas, Oregon.
+1.6 Project Deliverables
+List down the project deliverables briefly.
+• deliverable 1
+• deliverable 2
+1.7 Relevance to Course Modules
+A brief explanation of how your project is related to various courses studied during BCS.
+1.8 Problem Statement
+Write your problem statement here .
+1.9 Research Objective
+• To design efficient kernels in order to identify the covariate regions from GEI.
+1.10 Research Questions
+• How to design efficient Kernels in order to identify the covariate regions from GEI?
+1.11 Contribution
+This study proposes a novel deep learning framework, which utilizes parallel running cus-
+tom kernels in order to extract dynamic and static feature maps from the input GEI image.
+4
+
+--- Page 23 ---
+1.12 Chapter Summary
+The chapter begins by providing an introduction to gait analysis, highlighting its practical
+applications in real-life scenarios. It then transitions to the various methods utilized for gait
+recognition. Section 1.1 delves into Appearance-based methods, while section 1.2 focuses
+on model-based approaches. The subsequent section sheds light on covariate conditions
+in gait analysis and their impact. Following that, sections 1.4 and 1.5 address the problem
+statement and research objectives respectively. Lastly, the chapter concludes by discussing
+the hypothesis proposed as a potential solution to the identified problem.
+5
+
+--- Page 24 ---
+Chapter 2
+Literature Review
+
+--- Page 25 ---
+Chapter Overview
+This chapter introduces the ........... There are different methods based on which Gait anal-
+ysis has been done in past and can be classified into three types of approaches.
+2.0.1 First Application Problem / Research Paper
+Title:
+Video Summarization Using Deep Neural Networks: A Survey
+Evlampios Apostolidis, Eleni Adamantidou, Alexandros I. Metsai, Vasileios Mezaris, Ioan-
+nis Patras
+Proceedings of the IEEE, 109(11), Nov. 2021
+Problem Statement
+Video summarization aims to generate a concise synopsis by selecting the most informative
+parts of the video content. This task involves identifying key frames or segments that best
+represent the video’s main events or themes.
+Methods Used
+The paper presents a comprehensive survey of deep learning-based methods for video
+summarization, categorizing them into supervised, unsupervised, and weakly-supervised
+approaches. It discusses the use of Convolutional Neural Networks (CNNs) for feature
+extraction, Long Short-Term Memory (LSTM) networks for capturing temporal dependen-
+cies, and Generative Adversarial Networks (GANs) for unsupervised summarization.
+Results / Key Findings
+The survey highlights the evolution of deep learning techniques in video summarization,
+emphasizing the importance of temporal dynamics and semantic understanding. It also dis-
+cusses the challenges in evaluating summarization methods and the need for standardized
+benchmarks.
+Relation to Proposed Project
+Your classroom activity recognition project shares similarities with video summarization
+tasks, particularly in identifying and classifying significant segments (e.g., writing on board,
+hand raising). The deep learning techniques discussed in this paper, such as CNNs for fea-
+
+--- Page 26 ---
+ture extraction and LSTMs for temporal analysis, are directly applicable to your project.
+Implementing these methods can enhance the accuracy and efficiency of recognizing and
+summarizing classroom activities.
+2.0.2 Second Application Problem / Research Paper
+Title:
+Video Summarization with Long Short-term Memory
+Ke Zhang, Wei-Lun Chao, Fei Sha, Kristen Grauman
+European Conference on Computer Vision (ECCV), 2016
+Problem Statement
+Video summarization aims to create a concise and informative summary of a video by
+selecting keyframes or subshots that represent the most important content. Traditional
+methods often struggle to capture the temporal dependencies and semantic flow inherent in
+videos.
+Methods Used
+• Long Short-Term Memory (LSTM) networks to capture long-range temporal depen-
+dencies.
+• Structured prediction framework to determine whether each video frame should be
+included in the summary.
+• Domain adaptation techniques to generalize across different video datasets.
+Results / Key Findings
+• The LSTM-based model captures video sequence structure effectively.
+• Domain adaptation improves generalization on diverse datasets.
+• Achieves state-of-the-art performance on benchmark summarization datasets.
+Relation to Proposed Project
+Your classroom activity recognition project involves identifying and classifying significant
+video segments, similar to video summarization tasks. The LSTM-based approach dis-
+cussed in this paper can be applied to model the temporal dependencies between classroom
+2
+
+--- Page 27 ---
+activities, improving the accuracy and efficiency of activity detection. Domain adaptation
+can also help transfer learning from larger datasets to classroom-specific videos.
+2.0.3 Comparison Between Existing Applications and Proposed Project
+Application Name Weakness Proposed Project Solution
+Video Summarization
+Using Deep Neural
+Networks: A Survey
+(2021)
+Focuses only on summariza-
+tion; no action recognition
+or classroom-specific moni-
+toring.
+Integrates action recognition,
+punctuality checking, alerts,
+and classroom analytics.
+Video Summarization
+with LSTM (2016)
+Does not identify classroom
+activities; no timetable com-
+parison.
+Uses I3D + LSTM for ac-
+tivity detection and compares
+results with scheduled lecture
+times.
+Traditional Video Sum-
+marization Methods
+Fail to model long-term tem-
+poral relationships.
+Sequential modeling through
+I3D + LSTM improves tem-
+poral understanding.
+Manual Classroom
+Monitoring
+Time-consuming, inconsis-
+tent, and prone to human
+error.
+Fully automated system that
+summarizes sessions and ex-
+tracts highlights.
+CCTV Without AI Captures raw footage only, no
+insights or interpretation.
+Produces structured sum-
+maries, highlights, punctu-
+ality reports, and analytics
+dashboards.
+Table 2.1 Comparison Between Existing Literature and Proposed Project
+2.1 Chapter Summary
+This chapter reviewed existing research on video summarization and activity analysis. It
+highlighted how deep learning methods such as CNNs, LSTMs, and GANs have advanced
+the field by improving feature extraction and temporal understanding. The discussed works
+also showed limitations, including the absence of classroom-specific activity recognition
+and punctuality evaluation. By comparing these studies with real-world classroom needs,
+the chapter demonstrated the gaps in current approaches. The proposed project addresses
+these gaps through an integrated AI-based system that combines I3D and LSTM models to
+detect classroom activities, generate summaries and highlights, evaluate punctuality, and
+produce automated alerts, offering a more efficient and comprehensive solution.
+3
+
+--- Page 28 ---
+Chapter 3
+Requirement Analysis
+
+--- Page 29 ---
+Chapter Overview
+This chapter introduces the background, motivation, and detailed requirements of the pro-
+posed AI-Based Classroom Monitoring System. It identifies the users, describes requirement-
+gathering techniques, and specifies the functional and non-functional requirements neces-
+sary for the system.
+3.1 User Classes and Characteristics
+The system will be used by multiple types of stakeholders. Table 3.1 provides the user
+classes and their characteristics.
+Table 3.1 User Classes and Their Characteristics
+User Class Characteristics Technical Level
+Administrator University staff responsible for
+monitoring punctuality, reviewing
+summaries and highlights, and
+tracking alerts
+Medium
+Teacher Instructor whose classroom activi-
+ties are recorded and analyzed
+Low
+System Operator
+/ IT Staff
+Manages backend operations,
+timetable uploads, system mainte-
+nance
+High
+Quality Assur-
+ance Department
+Reviews teaching quality, session
+behavior, punctuality trends
+Medium
+Super Admin
+(HOD/Dean)
+Higher management who requires
+complete system insights and re-
+ports
+Medium
+3.2 Requirement Identifying Technique
+A combination of techniques was used to identify functional and non-functional require-
+ments:
+
+--- Page 30 ---
+•Use Case Modeling– For identifying interactions between users and system. (In-
+cludes Use Case Diagram + Use Case Descriptions)
+•Event–Response Table– As many operations (summary generation, alerting) occur
+automatically at the backend.
+•Storyboarding– Used for the graphical design of the React dashboard to visualize
+user interactions.
+These techniques collectively helped in extracting clear and complete requirements for the
+system.
+3.3 Functional Requirements
+Functional Requirements are organized by major features of the system. Each requirement
+is presented using a structured template.
+3.3.1 FR-1: Teacher Activity Recognition
+Table 3.2 Description of FR-1
+Identifier FR-1
+Title Detect Teacher Activity
+Requirement The system shall detect teacher activities (explaining,
+writing, mobile usage, interaction) using the I3D+LSTM
+model.
+Source Supervisor, Project Proposal
+Rationale Required for summarization, highlights, and behavior mon-
+itoring.
+Dependencies FR-2, FR-3
+Priority High
+2
+
+--- Page 31 ---
+3.3.2 FR-2: Generate Classroom Summary
+Table 3.3 Description of FR-2
+Identifier FR-2
+Title Generate Classroom Summary
+Requirement The system shall generate an automated text summary of
+the classroom session based on detected activities.
+Source Research Objective
+Rationale Enables quick understanding of long classroom recordings.
+Dependencies FR-1
+Priority High
+3.3.3 FR-3: Extract Video Highlights
+Table 3.4 Description of FR-3
+Identifier FR-3
+Title Extract Video Highlights
+Requirement The system shall extract short highlight clips that represent
+major classroom activities.
+Priority Medium
+3.3.4 FR-4: Track Arrival & Departure
+Table 3.5 Description of FR-4
+Identifier FR-4
+Title Arrival/Departure Detection
+Requirement The system shall detect the teacher’s arrival and departure
+time using video timestamps.
+Priority High
+3
+
+--- Page 32 ---
+3.3.5 FR-5: Compare With Timetable
+Table 3.6 Description of FR-5
+Identifier FR-5
+Title Timetable Validation
+Requirement The system shall compare detected times with the scheduled
+timetable to determine punctuality.
+Priority High
+3.3.6 FR-6: Generate Alerts
+Table 3.7 Description of FR-6
+Identifier FR-6
+Title Alert System
+Requirement The system shall generate alerts for late arrival, early leave,
+or absence.
+Priority High
+3.3.7 FR-7: Dashboard Management
+Table 3.8 Description of FR-7
+Identifier FR-7
+Title Dashboard Display
+Requirement The system shall allow administrators to review summaries,
+highlights, punctuality logs, and alerts through a web-based
+dashboard.
+Priority High
+3.4 Non-Functional Requirements
+3.4.1 Reliability
+• The system shall maintain at least 90% uptime.
+4
+
+--- Page 33 ---
+• Teacher arrival/departure detection must be accurate within a±10-second tolerance.
+• The system shall ensure stable processing of long-duration videos without crashing.
+3.4.2 Usability
+• Dashboard shall be simple and intuitive for non-technical users.
+• Summaries and highlights must be accessible within 1–2 clicks.
+• System shall maintain consistent font styles, spacing, and color schemes.
+3.4.3 Performance
+• A one-hour video must be processed within 2–5 minutes using GPU resources.
+• Dashboard pages shall fully load within 3 seconds.
+• Alerts shall be generated immediately after timetable comparison.
+3.4.4 Security
+• System shall restrict access using role-based authentication.
+• Sensitive data such as teacher attendance and video files must be protected.
+• Communication between frontend and backend shall use secure HTTPS.
+3.5 External Interface Requirements
+3.5.1 User Interface Requirements
+• The UI shall follow a consistent React + Tailwind CSS design structure.
+• All screens shall follow uniform typography, color palette, and button styles.
+• The dashboard must include modules for summaries, highlights, punctuality, and
+alerts.
+• The interface shall support HD video playback (MP4).
+5
+
+--- Page 34 ---
+3.5.2 Software Interfaces
+• The frontend communicates with the backend through RESTful APIs (FastAPI/Flask).
+• The system integrates with the I3D+LSTM deep learning model for inference.
+• Database used: MongoDB or PostgreSQL.
+3.5.3 Hardware Interfaces
+• Compatible with fixed-position classroom CCTV or webcam recordings.
+• Requires GPU server for faster model inference.
+• Minimum supported video resolution is 720p.
+3.5.4 Communications Interfaces
+• All communications shall use HTTPS.
+• Alerts may be sent via email or SMS (optional module).
+• Timetable shall be uploaded via CSV or admin panel forms.
+3.6 Chapter Summary
+This chapter presented a detailed analysis of the requirements for the AI-Based Classroom
+Monitoring System. It identified the main user classes, including administrators, teachers,
+system operators, quality assurance staff, and higher management, along with their roles
+and technical skill levels. Various requirement-gathering techniques such as use case mod-
+eling, event–response analysis, and storyboarding were discussed as the basis for capturing
+system needs.
+The chapter also defined the functional requirements, covering teacher activity recognition,
+classroom summarization, video highlight extraction, punctuality tracking, timetable vali-
+dation, alert generation, and dashboard management. In addition, non-functional require-
+ments related to reliability, usability, performance, and security were specified to ensure
+system stability, efficiency, and safe operation.
+Finally, the external interface requirements were outlined, including user, software, hard-
+ware, and communication interfaces. Overall, this chapter established a clear and structured
+foundation for the design and implementation of the proposed system in the coming phases.
+6
+
+--- Page 35 ---
+Chapter 4
+Design and Architecture
+
+--- Page 36 ---
+Chapter Overview
+This chapter introduces the background, motivation, and problem statement of the project.
+It highlights the research gap and explains why this study is important. The chapter also
+outlines the objectives and structure of the work.
+4.1 Modules
+This section describes the major modules of the proposedAI-Based Classroom Monitor-
+ing System. Each module highlights its features and responsibilities. The system is divided
+into three major components:Admin Web Application,Backend Processing & AI Engine,
+and theDatabase & Storage Layer.
+4.1.1 Module 1: Video Processing & Activity Recognition Module
+This module handles the extraction of frames from classroom videos and performs activity
+classification using the I3D + LSTM deep learning pipeline.
+•FE1:Extract frames automatically from uploaded classroom videos.
+•FE2:Apply the I3D model to extract spatial–temporal features.
+•FE3:Use LSTM to classify instructor activities (e.g., writing, explaining, interact-
+ing, mobile usage).
+•FE4:Store detected activities with timestamps in the database.
+•FE5:Provide processed activity data to summarization and punctuality modules.
+4.1.2 Module 2: Video Summarization & Highlights Module
+This module generates an automated summary and highlights of the classroom session
+based on the detected actions.
+•FE1:Identify significant activities to generate meaningful text summaries.
+•FE2:Extract short video highlight clips of key classroom moments.
+•FE3:Rank classroom events based on activity importance.
+
+--- Page 37 ---
+•FE4:Provide summary and highlight data to the admin dashboard.
+•FE5:Store summaries and highlight information in the database.
+4.1.3 Module 3: Punctuality Tracking Module
+This module identifies the instructor’s arrival and departure times using video-based detec-
+tion and compares them with the scheduled timetable.
+•FE1:Detect the instructor’s first appearance to record arrival time.
+•FE2:Detect the instructor’s last visible moment to record departure time.
+•FE3:Compare detected times with the stored timetable.
+•FE4:Assign punctuality status (On-Time, Late, Early Leave, Absent).
+•FE5:Save punctuality logs for reporting and analytics.
+4.1.4 Module 4: Alert & Notification Module
+This module generates alerts based on detected punctuality and class behavior.
+•FE1:Trigger alert for late arrival.
+•FE2:Trigger alert for early departure.
+•FE3:Generate alert for instructor absence.
+•FE4:Notify admin through dashboard or optional email/SMS.
+•FE5:Store all alerts in the system logs for transparency.
+4.1.5 Module 5: Admin Web Dashboard Module
+This module provides administrators with access to all system features via a user-friendly
+web interface.
+•FE1:Upload classroom videos for processing.
+•FE2:View AI-generated summaries and highlights.
+2
+
+--- Page 38 ---
+•FE3:Analyze punctuality logs and class timings.
+•FE4:Access teacher performance analytics and visualization.
+•FE5:Download session reports and summaries.
+•FE6:Manage instructor profiles and timetable data.
+4.1.6 Module 6: Database & Storage Module
+This module manages data related to teachers, videos, predictions, summaries, punctuality
+logs, and alerts.
+•FE1:Store instructor profiles and timetable information.
+•FE2:Securely store classroom videos and extracted features.
+•FE3:Save all activity predictions generated by the AI model.
+•FE4:Maintain summary, highlights, and punctuality results.
+•FE5:Ensure reliable and secure data access for all system components.
+4.2 Architectural Design
+This section provides a high-level overview of the model and system architecture used in
+the proposed AI-Based Classroom Monitoring System. The goal is to explain how the
+system is structured, how different modules interact, and how complete functionality is
+achieved without going into low-level implementation details.
+The architecture follows a multi-tier modular design consisting of five major layers:
+4.2.1 Client Layer (Admin Web Dashboard)
+The client layer represents the user-facing system built using React and Tailwind CSS. It
+provides:
+• Video upload interface
+• Access to summaries and video highlights
+• Punctuality records and alert notifications
+3
+
+--- Page 39 ---
+• Teacher and timetable management options
+This layer sends requests to the backend API and displays the processed results to the
+administrator.
+4.2.2 Backend API Layer (Flask / FastAPI)
+The backend layer acts as the bridge between the frontend and the AI processing module.
+Its responsibilities include:
+• Receiving video uploads
+• Managing API endpoints
+• Sending video data to the AI model for processing
+• Returning outputs such as summaries, highlights, alerts, and punctuality records
+4.2.3 AI Processing Layer (I3D + LSTM Engine)
+This layer is responsible for all AI-driven video analysis. Major operations include:
+• Extracting frames from classroom videos
+• Generating spatial-temporal features using I3D
+• Predicting classroom actions through LSTM
+• Producing video summaries and key highlights
+• Detecting teacher arrival and departure times
+• Calculating punctuality by comparing detected times with the timetable
+• Generating alerts for late arrival, early departure, or absence
+4.2.4 Database Layer
+This layer manages the structured storage of:
+• Teacher profiles
+• Timetable information
+4
+
+--- Page 40 ---
+• Video logs and summaries
+• Highlight clips and activity predictions
+• Punctuality and alert records
+4.2.5 Storage Layer
+Large files such as uploaded classroom videos and extracted highlight clips are stored sep-
+arately in a dedicated storage component.
+4.2.6 System Workflow Overview
+The overall system workflow proceeds as follows:
+1. The administrator uploads a classroom video through the dashboard.
+2. The backend API receives the video and forwards it to the AI processing engine.
+3. The AI module analyzes the video and generates summaries, highlights, predictions,
+and punctuality data.
+4. All processed results are stored in the database and storage layer.
+5. The frontend retrieves this data and presents it to the administrator through an inter-
+active dashboard.
+4.2.7 Architectural Diagrams
+The following diagrams illustrate the high-level system structure:
+• Box-and-Line Diagram
+• Multi-tier Client–Server Architecture Diagram
+)
+5
+
+--- Page 41 ---
+Figure 4.1 Architecture design6
+
+--- Page 42 ---
+4.3 Design Models
+This section presents the design models created for the AI-Based Classroom Monitoring
+System. Each model visually explains a different aspect of the system, including work-
+flows, user interactions, class structures, operational sequences, and internal state changes.
+These diagrams collectively help in understanding how different system components col-
+laborate to perform tasks such as video processing, summarization, punctuality detection,
+and alert generation.
+4.3.1 Use Case Diagram
+The Use Case Diagram describes the interaction between the main actor (Admin/Academic
+Staff) and the system. It highlights all core functionalities provided by the system, includ-
+ing video upload, viewing summaries, generating highlights, obtaining punctuality reports,
+and accessing alert notifications.
+Figure 4.2 Use Case Diagram for the Classroom Monitoring System
+7
+
+--- Page 43 ---
+4.3.2 Activity Diagram
+The Activity Diagram illustrates the end-to-end workflow of the system, starting from video
+upload to the generation of summaries, highlights, punctuality status, and alerts. It captures
+all major processing stages, such as video preprocessing, feature extraction using I3D,
+temporal action classification using LSTM, and final results displayed on the dashboard.
+8
+
+--- Page 44 ---
+Figure 4.3 Activity Diagram of the Classroom Monitoring System
+9
+
+--- Page 45 ---
+4.3.3 Class Diagram
+The Class Diagram represents the static structure of the system by defining the primary
+system classes such asAdmin,VideoManager,AIProcessor,SummaryGenerator,Punctu-
+alityManager,AlertManager,DatabaseService, andVideoStorage. It also highlights the
+relationship among these classes and their core responsibilities.
+10
+
+--- Page 46 ---
+Figure 4.4 Class Diagram of the Classroom Monitoring System
+11
+
+--- Page 47 ---
+4.3.4 Sequence Diagram
+The Sequence Diagram provides a step-by-step interaction flow among the system compo-
+nents during video analysis. It describes how the Admin uploads a video, how the backend
+stores it, how the AI model processes it, and how the system generates summaries, high-
+lights, punctuality results, and alerts before sending them back to the frontend for display.
+[a4paper]article graphicx geometry float [font=Large]caption
+top=1cm, bottom=1cm, left=1cm, right=1cm
+12
+
+--- Page 48 ---
+Figure 4.5 Sequence Diagram for Video Processing Workflow
+13
+
+--- Page 49 ---
+4.3.5 State Transition Diagram
+The State Transition Diagram illustrates how the system moves through various states dur-
+ing video analysis. These states include: Idle, Video Uploaded, Preprocessing, Feature
+Extraction, Action Classification, Summary Generation, Punctuality Checking, Alert Trig-
+ger, and Results Available. It describes how internal processes trigger transitions from one
+state to another.
+14
+
+--- Page 50 ---
+Figure 4.6 State Transition Diagram of the Video Analysis Process
+15
+
+--- Page 51 ---
+4.3.6 ER Diagram
+The Entity Relationship (ER) Diagram represents the core data model of the AI-Based
+Classroom Monitoring System. It defines the primary entities such asInstructor,[- ’]====
+lSchedule,Attendance,Video,Summary, andAlert, along with the relationships that ensure
+correct attendance logging, timetable mapping, video association, summary generation,
+and alert triggering. This ERD forms the foundation for the system’s database design and
+ensures efficient and structured data management.
+16
+
+--- Page 52 ---
+Figure 4.7 ER Diagram of the Classroom Monitoring System
+17
+
+--- Page 53 ---
+Chapter 5
+Conclusion
+
+--- Page 54 ---
+Chapter Overview
+This chapter introduces the background, motivation, and problem statement of the project.
+It highlights the research gap and explains why this study is important. The chapter also
+outlines the objectives and structure of the work.
+5.1 Conclusion
+This project demonstrates the need for an automated and intelligent solution to overcome
+the limitations of traditional classroom monitoring. Manual evaluation is time-consuming,
+inconsistent, and impractical for large educational institutions. By integrating advanced
+deep learning models such as I3D and LSTM with computer vision techniques, the pro-
+posed AI-Based Classroom Monitoring System offers an efficient and scalable alternative.
+The system is designed to analyze recorded classroom videos, detect teacher activities,
+generate summaries and key highlights, identify arrival and departure times, and compare
+them with institutional timetables. Through these features, the project aims to enhance
+transparency, support administrative decision-making, and reduce human effort in class-
+room supervision. Although the system depends on predefined actions, camera quality,
+and GPU resources, it still provides a highly innovative and valuable framework for educa-
+tional monitoring.
+Overall, this documentation outlines the foundation, objectives, scope, limitations, and con-
+tributions of the system, establishing a strong basis for the technical design and implemen-
+tation phases. The project ultimately contributes to modernizing educational management
+by introducing AI-driven automation, reliability, and actionable insights.
+
+--- Page 55 ---
+References
+2
+
+--- Page 56 ---
+[1] E. Apostolidis, E. Adamantidou, A. I. Metsai, V . Mezaris, and I. Patras, “Video Sum-
+marization Using Deep Neural Networks: A Survey,”Proceedings of the IEEE, vol.
+109, no. 11, pp. 1513–1549, Nov. 2021.
+[2] K. Zhang, W.-L. Chao, F. Sha, and K. Grauman, “Video Summarization with Long
+Short-Term Memory,” inProceedings of the European Conference on Computer Vision
+(ECCV), 2016.
+[3] J. Carreira and A. Zisserman, “Quo Vadis, Action Recognition? A New Model and
+the Kinetics Dataset,” inProceedings of the IEEE Conference on Computer Vision and
+Pattern Recognition (CVPR), 2017.
+[4] S. Hochreiter and J. Schmidhuber, “Long Short-Term Memory,”Neural Computation,
+vol. 9, no. 8, pp. 1735–1780, 1997.
+[5] K. Simonyan and A. Zisserman, “Two-Stream Convolutional Networks for Action
+Recognition in Videos,” inAdvances in Neural Information Processing Systems
+(NeurIPS), 2014.
+[6] F. Nweke, Y . Teh, M. A. Mujtaba, and B. Al-gunaid, “Deep Learning Algorithms for
+Human Activity Recognition: A Survey,”IEEE Access, vol. 7, pp. 167–172, 2019.
+[7] A. Krizhevsky, I. Sutskever, and G. Hinton, “ImageNet Classification with Deep Con-
+volutional Neural Networks,”Communications of the ACM, vol. 60, no. 6, pp. 84–90,
+2012.
+[8] F. Schroff, D. Kalenichenko, and J. Philbin, “FaceNet: A Unified Embedding for Face
+Recognition and Clustering,” inProceedings of the IEEE Conference on Computer
+Vision and Pattern Recognition (CVPR), 2015.
+[9] C. Feichtenhofer, H. Fan, J. Malik, and K. He, “SlowFast Networks for Video Recog-
+nition,” inProceedings of the IEEE International Conference on Computer Vision
+(ICCV), 2019.
+[10] H. Kuehne, H. Jhuang, E. Garrote, T. Poggio, and T. Serre, “HMDB: A Large Video
+Database for Human Motion Recognition,” inProceedings of the IEEE International
+Conference on Computer Vision (ICCV), 2011.
+3
